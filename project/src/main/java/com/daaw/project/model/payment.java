@@ -16,8 +16,8 @@ public class payment {
     private Long id;
     @Column(name = "nom")
     private String nom;
-    @Column(name = "way")
-    private String way;
+    @Column(name = "method")
+    private String method;
 
 
 }

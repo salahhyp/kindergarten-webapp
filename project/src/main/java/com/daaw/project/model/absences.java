@@ -20,6 +20,4 @@ public class absences {
 
     @Column(name = "justification")
     private String justification;
-
-
 }

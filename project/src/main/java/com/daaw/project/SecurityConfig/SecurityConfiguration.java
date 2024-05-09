@@ -29,6 +29,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+
 public class SecurityConfiguration {
 
     private JwtAuthEntryPoint authEntryPoint;
@@ -39,8 +40,6 @@ public class SecurityConfiguration {
         this.userDetailsService = userDetailsService;
         this.authEntryPoint = authEntryPoint;
     }
-
-
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -54,7 +53,15 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeRequests()
                 .requestMatchers("/api/auth/login").permitAll()
-                .requestMatchers("/api/auth/register").hasAuthority("ADMIN")
+                .requestMatchers("/api/auth/register").permitAll()
+                .requestMatchers("/api/events").permitAll()
+                .requestMatchers("/api/child").permitAll()
+                .requestMatchers("/api/absences").permitAll()
+                .requestMatchers("/api/parent").permitAll()
+                .requestMatchers("/api/educators").permitAll()
+                .requestMatchers("/api/parent/").permitAll()
+                .requestMatchers("/api/payments").permitAll()
+                .requestMatchers("/api/preinscrits").permitAll()
                 .requestMatchers(HttpMethod.GET).permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -63,6 +70,8 @@ public class SecurityConfiguration {
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
+
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
