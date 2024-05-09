@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+</head>
+<body>
+<!-- Example logout button using a form -->
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Logout</button>
+</form>
+
+<!-- Example logout link using an anchor tag -->
+<a th:href="@{/logout}">Logout</a>
+</body>
+</html>

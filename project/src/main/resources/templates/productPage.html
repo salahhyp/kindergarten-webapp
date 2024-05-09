@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+    <title>Product Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #250C58;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        div {
+            margin: 20px;
+            padding: 10px;
+            background-color: #2F1465;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            color: white;
+            margin: 10px 0;
+        }
+
+        span {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        div[th-else] {
+            color: #dc3545;
+        }
+    </style>
+
+</head>
+
+<body>
+<div layout:fragment="content">
+    <h1>event Detail</h1>
+    <div th:if="${productFound != null}">
+        <p>User ID: <span th:text="${productFound.id}"></span></p>
+        <p>Firstname: <span th:text="${productFound.name}"></span></p>
+        <p>Lastname: <span th:text="${productFound.category}"></span></p>
+        <p>Birthdate: <span th:text="${productFound.price}"></span></p>
+        <p>Age: <span th:text="${productFound.quantity}"></span></p>
+
+
+    </div>
+    <div th:if="${productFound == null}">
+        <span style="display: block">Product not found</span>
+
+    </div>
+    <a th:href="@{/productsList/0}" class="btn btn-success">Return To List</a>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

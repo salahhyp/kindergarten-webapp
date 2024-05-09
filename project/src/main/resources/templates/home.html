@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #555;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Welcome to Prodigy kindergarten</h1>
+
+    <h2>Add Child</h2>
+    <form id="addChildForm">
+        <label for="childName">child Name:</label>
+        <input type="text" id="childName" name="childName" required>
+        <label for="child_Description">Description:</label>
+        <textarea id="child_Description" name="child_Description" rows="4" required></textarea>
+        <button type="submit">Add child</button>
+    </form>
+
+    <h2>Parent Information</h2>
+    <ul id="clientList"></ul>
+
+    <h2>other Information</h2>
+    <ul id="commercantList"></ul>
+</div>
+
+<script>
+    // Function to handle form submission for adding a event
+    document.getElementById('addchildForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const childName = document.getElementById('childName').value;
+        const child_Description = document.getElementById('child_Description').value;
+
+        // Send data to server using fetch or XMLHttpRequest
+        // Example:
+        fetch('/add-event', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: childName,
+                description: child_Description,
+            }),
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Reload the page to update event list
+                    window.location.reload();
+                } else {
+                    throw new Error('Failed to add event');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to add event. Please try again.');
+            });
+    });
+
+    // Fetch parent data
+    fetch('/parents')
+        .then(response => response.json())
+        .then(data => {
+            const clientList = document.getElementById('parentList');
+            data.forEach(parent => {
+                const li = document.createElement('li');
+                li.textContent = `Name: ${parent.name}, ID: ${parent.id}`;
+                clientList.appendChild(li);
+            });
+        });
+
+    // Fetch accountant data
+    fetch('/accountants')
+        .then(response => response.json())
+        .then(data => {
+            const accountantList = document.getElementById('accountantList');
+            data.forEach(accountant => {
+                const li = document.createElement('li');
+                li.textContent = `Name: ${accountant.name}, ID: ${accountant.id}`;
+                accountantList.appendChild(li);
+            });
+        });
+
+    // Fetch educator data
+    fetch('/educators')
+        .then(response => response.json())
+        .then(data => {
+            const educatorList = document.getElementById('educatorList');
+            data.forEach(educator => {
+                const li = document.createElement('li');
+                li.textContent = `Name: ${educator.name}, ID: ${educator.id}`;
+                educatorList.appendChild(li);
+            });
+        });
+
+    // Fetch event data
+    fetch('/child')
+        .then(response => response.json())
+        .then(data => {
+            const childList = document.getElementById('childList');
+            data.forEach(event => {
+                const li = document.createElement('li');
+                li.textContent = `Name: ${event.name}, ID: ${event.id}`;
+                childList.appendChild(li);
+            });
+        });
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="base">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Update Product</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+</head>
+
+<body>
+<div layout:fragment="content">
+
+    <div class="container mt-3">
+        <h1>Add Product</h1>
+
+        <form th:action="@{/getProduct}" method="get" class="form">
+            <div class="mb-3">
+                <label for="id" class="form-label">ID</label>
+                <input type="number" th:field="${productSearch.id}" class="form-control" id="id" required>
+            </div>
+            <button type="submit" class="btn btn-success">Search</button>
+        </form>
+
+        </form>
+    </div>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.min.js}"></script>
+</body>
+
+</html>
