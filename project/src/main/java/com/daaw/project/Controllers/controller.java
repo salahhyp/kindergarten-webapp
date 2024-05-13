@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins="http://localhost:3000")
 @RestController
 @RequestMapping("/api")
 public class controller {
@@ -112,12 +112,16 @@ public class controller {
 
 
     // Endpoints for preinscrit
-    @PostMapping("/preinscrits")
+    @PostMapping("/preinscrits/add")
     public ResponseEntity<preinscrit> addpreinscrit(@RequestBody preinscrit preinscrit) {
-        preinscrit savedpreinscrit = preinscritService.addpreinscrit(preinscrit);
+        preinscrit savedpreinscrit = preinscritService.save(preinscrit);
         return new ResponseEntity<>(savedpreinscrit, HttpStatus.CREATED);
     }
-
+    @GetMapping("/preinscrits")
+    public ResponseEntity<List<preinscrit>> getAllpreinscrits() {
+        List<preinscrit> preinscrits = preinscritService.findAll();
+        return new ResponseEntity<>(preinscrits, HttpStatus.OK);
+    }
 
 
     @PostMapping("/parent")

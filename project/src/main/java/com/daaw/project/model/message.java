@@ -1,38 +1,34 @@
 package com.daaw.project.model;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name="event")
+@Table(name="message")
 @Setter  @Getter @AllArgsConstructor @NoArgsConstructor
-public class event {
+public class message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "category")
-    private String category;
-
-
-    @Column(name = "price")
-    private Double price;
+    @Column(name = "content")
+    private String content;
 
     @ManyToOne
-    @JoinColumn(name = "parent_id")
-    private parent parent;
+    @JoinColumn(name = "sender_id")
+    private parent sender;
 
     @ManyToOne
-    @JoinColumn(name = "admin_id")
-    private admin admin;
+    @JoinColumn(name = "recipient_id")
+    private admin recipient;
+
+    @CreationTimestamp
+    private LocalDateTime timestamp;
 
 }

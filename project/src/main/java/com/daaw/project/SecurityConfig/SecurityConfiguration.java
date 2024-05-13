@@ -62,6 +62,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/api/parent/").permitAll()
                 .requestMatchers("/api/payments").permitAll()
                 .requestMatchers("/api/preinscrits").permitAll()
+                .requestMatchers("/api/chat/send").permitAll()
                 .requestMatchers(HttpMethod.GET).permitAll()
                 .anyRequest().authenticated()
                 .and()

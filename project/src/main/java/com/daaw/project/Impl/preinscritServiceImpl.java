@@ -1,8 +1,6 @@
 package com.daaw.project.Impl;
 
 
-
-
 import com.daaw.project.model.preinscrit;
 import com.daaw.project.repositories.preinscritRepository;
 import com.daaw.project.services.preinscritService;
@@ -28,7 +26,7 @@ public class preinscritServiceImpl implements preinscritService {
     }
 
     @Override
-    public preinscrit addpreinscrit(preinscrit mcommpte) {
+    public preinscrit addPreinscrit(preinscrit mcommpte) {
         return null;
     }
 

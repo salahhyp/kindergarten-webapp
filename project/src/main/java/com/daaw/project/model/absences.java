@@ -20,4 +20,13 @@ public class absences {
 
     @Column(name = "justification")
     private String justification;
+
+    @ManyToOne
+    @JoinColumn(name = "child_id")
+    private child child;
+
+    @ManyToOne
+    @JoinColumn(name = "session_id")
+    private session session;
+
 }

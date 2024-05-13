@@ -19,5 +19,8 @@ public class payment {
     @Column(name = "method")
     private String method;
 
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private parent parent;
 
 }

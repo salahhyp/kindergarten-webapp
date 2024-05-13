@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,10 @@ import com.daaw.project.model.*;
 import com.daaw.project.SecurityConfig.JWTGenerator;
 import com.daaw.project.repositories.roleRepository;
 import com.daaw.project.repositories.userRepository;
+
+@CrossOrigin(origins="http://localhost:3000")
+
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -49,6 +54,7 @@ public class AuthController {
                 loginDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtGenerator.generateToken(authentication);
+        System.out.println("User " + loginDto.getUsername() + " logged on.");
         return new ResponseEntity<>(new AuthResponseDto(token), HttpStatus.OK);
 
     }

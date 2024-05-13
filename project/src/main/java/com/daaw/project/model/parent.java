@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name="parent")
 @Setter  @Getter @AllArgsConstructor @NoArgsConstructor
@@ -18,8 +21,19 @@ public class parent {
     private String nom;
     @Column(name = "prenom")
     private String prenom;
-    @Column(name = "adress")
-    private String adress;
+    @Column(name = "address")
+    private String address;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<event> events = new ArrayList<>();
+
+
+
+    @OneToMany(mappedBy = "parent")
+    private List<child> children;
+
+    @OneToMany(mappedBy = "parent")
+    private List<payment> payments;
 
 
 }

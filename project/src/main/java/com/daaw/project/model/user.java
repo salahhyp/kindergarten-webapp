@@ -29,4 +29,10 @@ public class user {
     )
     private List<role> roles = new ArrayList<>();
 
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private role role;
+
+
 }

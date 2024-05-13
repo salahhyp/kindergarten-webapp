@@ -23,6 +23,10 @@ public class educator {
     @Column(name = "adress")
     private String adress;
 
+    @OneToMany(mappedBy = "educator")
+    private List<child> children;
 
+    @OneToMany(mappedBy = "educator")
+    private List<session> sessions;
 
 }

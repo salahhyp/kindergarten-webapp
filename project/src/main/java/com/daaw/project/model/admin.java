@@ -27,7 +27,8 @@ public class admin {
     private String adress;
 
 
-
+    @OneToMany(mappedBy = "admin")
+    private List<event> events;
 
 
 
