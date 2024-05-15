@@ -31,5 +31,15 @@ public class admin {
     private List<event> events;
 
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    private user user;
+
+    @PostPersist
+    private void linkUserToAdmin() {
+        if (user != null && user.getId() != null) {
+            user.setAdmin(this); // Use the correct property name
+        }
+    }
 
 }

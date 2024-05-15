@@ -34,5 +34,15 @@ public class user {
     @JoinColumn(name = "role_id")
     private role role;
 
+@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+private parent parent;
 
+@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+private educator educator;
+
+@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+private accountant accountant;
+
+@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+private admin admin;
 }

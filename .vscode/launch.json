@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ProjectApplication",
+            "request": "launch",
+            "mainClass": "com.daaw.project.ProjectApplication",
+            "projectName": "project"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"

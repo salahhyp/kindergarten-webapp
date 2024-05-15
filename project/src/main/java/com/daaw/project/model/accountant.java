@@ -21,4 +21,16 @@ public class accountant {
     @Column(name = "adress")
     private String adress;
 
+
+    
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    private user user;
+
+    @PostPersist
+    private void linkUserToAccountant() {
+        if (user != null && user.getId() != null) {
+            user.setAccountant(this); // Use the correct property name
+        }
+    }
 }
