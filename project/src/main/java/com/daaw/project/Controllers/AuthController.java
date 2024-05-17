@@ -76,6 +76,9 @@ public class AuthController {
     }
 
 
+
+
+    
     @PostMapping("register")
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
         System.out.println("register attempt reached for "+registerDto.getUsername());
