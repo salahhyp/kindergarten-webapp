@@ -67,6 +67,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/api/chat/parent/{parentId}").permitAll()
                 .requestMatchers("/api/chat/admin/{adminId}").permitAll()
                 .requestMatchers("/api/location").permitAll()
+                .requestMatchers("/api/location/update").permitAll()
                 .requestMatchers("/api/location/**").permitAll()
                 .requestMatchers("/api/location/parent/{parentId}/latest").permitAll()
                 .requestMatchers(HttpMethod.GET).permitAll()

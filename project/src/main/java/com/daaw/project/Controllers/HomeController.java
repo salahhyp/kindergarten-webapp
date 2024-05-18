@@ -10,7 +10,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        return "chat"; // Return the name of the HTML file without the extension
+        return "track"; // Return the name of the HTML file without the extension
     }}
     /*@GetMapping("/track")
     public String track(@RequestParam Long parentId, Model model) {

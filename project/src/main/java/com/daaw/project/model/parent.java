@@ -30,13 +30,14 @@ public class parent {
     private List<Location> locations = new ArrayList<>();
 
     @OneToMany(mappedBy = "parent")
-    private List<event> events;
-
-    @OneToMany(mappedBy = "parent")
     private List<child> children;
 
     @OneToMany(mappedBy = "parent")
     private List<payment> payments;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<event> events = new ArrayList<>();
+
 
 
     @OneToOne(fetch = FetchType.LAZY)
