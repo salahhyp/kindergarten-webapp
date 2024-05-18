@@ -41,5 +41,4 @@ public class child {
     @JoinColumn(name = "educator_id")
     private educator educator;
 
-
 }

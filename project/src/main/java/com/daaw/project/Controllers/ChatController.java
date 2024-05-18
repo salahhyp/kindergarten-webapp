@@ -10,22 +10,51 @@ import org.springframework.web.bind.annotation.*;
 import com.daaw.project.repositories.messageRepository;
 
 import java.util.List;
+import com.daaw.project.model.parent;
+import com.daaw.project.model.admin;
+import com.daaw.project.services.messageService;
+import com.daaw.project.services.parentService;
+import com.daaw.project.services.adminService;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {
 
-    private final messageRepository messageRepository;
     @Autowired
-    public ChatController(com.daaw.project.repositories.messageRepository messageRepository) {
-        this.messageRepository = messageRepository;
+    private messageService messageService;
+
+    @Autowired
+    private parentService parentService;
+
+    @Autowired
+    private adminService adminService;
+
+    @GetMapping("/parent/{parentId}")
+    public List<message> getMessagesByParentId(@PathVariable Long parentId) {
+        return messageService.getMessagesByParentId(parentId);
+    }
+
+    @GetMapping("/admin/{adminId}")
+    public List<message> getMessagesByAdminId(@PathVariable Long adminId) {
+        return messageService.getMessagesByAdminId(adminId);
     }
 
     @PostMapping("/send")
-    public ResponseEntity<message> sendMessage(@RequestBody message message) {
-        // Save the message to the database
-        message savedMessage = messageRepository.save(message);
-        return ResponseEntity.ok(savedMessage);
+    public message sendMessage(@RequestParam Long parentId, @RequestParam Long adminId,
+                               @RequestParam String content, @RequestParam String sender) {
+        parent parent = parentService.getParentById(parentId);
+        admin admin = adminService.getAdminById(adminId);
+        if (parent != null && admin != null) {
+            message message = new message();
+            message.setParent(parent);
+            message.setAdmin(admin);
+            message.setContent(content);
+            message.setTimestamp(LocalDateTime.now());
+            message.setSender(com.daaw.project.model.message.Sender.valueOf(sender.toUpperCase()));
+            return messageService.saveMessage(message);
+        }
+        return null;
     }}
 
 

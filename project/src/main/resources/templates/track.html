@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kid Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>Kid Tracker</h1>
+<form th:action="@{/track}" method="get">
+    <label for="parentId">Parent ID:</label>
+    <input type="text" id="parentId" name="parentId" required>
+    <button type="submit">Track</button>
+</form>
+
+<div id="map" style="width: 600px; height: 400px;"></div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var parentId = /*[[${parentId}]]*/ '0';
+
+    if (parentId !== '0') {
+        var map = L.map('map').setView([36.365, 6.614], 13); // Constantine coordinates
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        $.getJSON('/api/locations/parent/' + parentId, function(data) {
+            console.log('Location data received:', data); // Debugging line
+            data.forEach(function(location) {
+                L.marker([location.latitude, location.longitude]).addTo(map)
+                    .bindPopup('Time: ' + location.timestamp)
+                    .openPopup();
+            });
+        }).fail(function() {
+            console.error('Error fetching location data'); // Debugging line
+        });
+    }
+    /*]]>*/
+</script>
+</body>
+</html>

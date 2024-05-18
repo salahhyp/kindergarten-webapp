@@ -15,25 +15,20 @@ import java.util.Optional;
 public class messageServiceImpl implements messageService {
 
     @Autowired
-    messageRepository messageRepository;
+    private messageRepository messageRepository;
 
     @Override
-    public message addmessage(message message) {
+    public List<message> getMessagesByParentId(Long parentId) {
+        return messageRepository.findByParentId(parentId);
+    }
+
+    @Override
+    public List<message> getMessagesByAdminId(Long adminId) {
+        return messageRepository.findByAdminId(adminId);
+    }
+
+    @Override
+    public message saveMessage(message message) {
         return messageRepository.save(message);
-    }
-
-    @Override
-    public message getmessage(Long id) {
-        return messageRepository.findById(id).get();
-    }
-
-    @Override
-    public void deletemessage(Long id) {
-         messageRepository.deleteById(id);
-    }
-
-    @Override
-    public void save(message message) {
-         messageRepository.save(message);
     }
 }

@@ -15,7 +15,7 @@ public interface parentService {
    public void deleteparent(Long id);
 
    public Page<parent> getAllparents(Pageable pageable);
-   
-    
+
+    parent getParentById(Long parentId);
 }
 

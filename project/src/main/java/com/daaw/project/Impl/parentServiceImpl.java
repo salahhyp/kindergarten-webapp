@@ -35,4 +35,13 @@ public class parentServiceImpl implements parentService {
     public Page<parent> getAllparents(Pageable pageable) {
         return parentRepository.findAll(pageable);
     }
+
+
+    @Override
+    public parent getParentById(Long parentId) {
+        return parentRepository.findById(parentId).orElse(null);
+    }
+
+
+
 }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Messaging</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-4">Messaging</h1>
+
+    <!-- Form to send a message -->
+    <form id="sendMessageForm" class="mt-4">
+        <div class="form-group">
+            <label for="parentId">Parent ID:</label>
+            <input type="text" class="form-control" id="parentId" name="parentId" required>
+        </div>
+        <div class="form-group">
+            <label for="adminId">Admin ID:</label>
+            <input type="text" class="form-control" id="adminId" name="adminId" required>
+        </div>
+        <div class="form-group">
+            <label for="sender">Sender:</label>
+            <select class="form-control" id="sender" name="sender" required>
+                <option value="PARENT">Parent</option>
+                <option value="ADMIN">Admin</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="content">Message:</label>
+            <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+
+    <h2 class="mt-4">Messages</h2>
+    <div id="messagesList" class="mt-4"></div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Load messages initially
+        loadMessages();
+
+        // Handle form submission
+        $('#sendMessageForm').submit(function(event) {
+            event.preventDefault();
+
+            const formData = {
+                parentId: $('#parentId').val(),
+                adminId: $('#adminId').val(),
+                content: $('#content').val(),
+                sender: $('#sender').val()
+            };
+
+            $.post('/api/messages/send', formData, function(data) {
+                alert('Message sent successfully!');
+                $('#content').val(''); // Clear the message content
+                loadMessages(); // Reload messages
+            }).fail(function() {
+                alert('Error sending message.');
+            });
+        });
+
+        // Function to load messages
+        function loadMessages() {
+            const parentId = $('#parentId').val();
+            const adminId = $('#adminId').val();
+
+            if (parentId) {
+                $.getJSON(`/api/messages/parent/${parentId}`, function(data) {
+                    displayMessages(data);
+                });
+            } else if (adminId) {
+                $.getJSON(`/api/messages/admin/${adminId}`, function(data) {
+                    displayMessages(data);
+                });
+            }
+        }
+
+        // Function to display messages
+        function displayMessages(messages) {
+            let messagesHtml = '';
+
+            messages.forEach(function(message) {
+                messagesHtml += `
+                        <div class="card mt-2">
+                            <div class="card-body">
+                                <h5 class="card-title">${message.sender}</h5>
+                                <p class="card-text">${message.content}</p>
+                                <p class="card-text"><small class="text-muted">${message.timestamp}</small></p>
+                            </div>
+                        </div>
+                    `;
+            });
+
+            $('#messagesList').html(messagesHtml);
+        }
+    });
+</script>
+</body>
+</html>

@@ -15,20 +15,27 @@ import java.util.List;
 public class message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-    @Column(name = "content")
+
+    @ManyToOne
+    @JoinColumn(name = "parent_id", nullable = false)
+    private parent parent;
+
+    @ManyToOne
+    @JoinColumn(name = "admin_id", nullable = false)
+    private admin admin;
+
+    @Column(name = "content", nullable = false)
     private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "sender_id")
-    private parent sender;
-
-    @ManyToOne
-    @JoinColumn(name = "recipient_id")
-    private admin recipient;
-
-    @CreationTimestamp
+    @Column(name = "timestamp", nullable = false)
     private LocalDateTime timestamp;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sender", nullable = false)
+    private Sender sender;
+
+    public enum Sender {
+        PARENT, ADMIN
+    }
 }

@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.naming.Name;
 import java.util.Date;
 import java.util.List;
-
+import java.util.ArrayList;
 @Entity
 @Table(name="admin")
 @Setter  @Getter @AllArgsConstructor @NoArgsConstructor
@@ -35,6 +35,8 @@ public class admin {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private user user;
 
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<message> messages = new ArrayList<>();
     @PostPersist
     private void linkUserToAdmin() {
         if (user != null && user.getId() != null) {

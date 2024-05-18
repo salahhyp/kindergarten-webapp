@@ -38,4 +38,8 @@ public class adminServiceImpl implements adminService{
         adminRepository.deleteById(id);
     }
 
+    @Override
+    public admin getAdminById(Long adminId) {
+        return adminRepository.findById(adminId).orElse(null);
+}
 }

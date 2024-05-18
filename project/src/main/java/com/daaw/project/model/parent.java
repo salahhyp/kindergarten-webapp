@@ -1,5 +1,6 @@
 package com.daaw.project.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,9 +26,11 @@ public class parent {
     private String address;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<event> events = new ArrayList<>();
+    @JsonManagedReference
+    private List<Location> locations = new ArrayList<>();
 
-
+    @OneToMany(mappedBy = "parent")
+    private List<event> events;
 
     @OneToMany(mappedBy = "parent")
     private List<child> children;
@@ -36,12 +39,12 @@ public class parent {
     private List<payment> payments;
 
 
-
-
-    
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private user user;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<message> messages = new ArrayList<>();
 
     @PostPersist
     private void linkUserToParent() {

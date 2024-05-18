@@ -5,11 +5,8 @@ import java.util.List;
 import java.util.Optional;
 public interface messageService {
 
-    public message addmessage(message message);
-
-    public message getmessage(Long id);
-    public void deletemessage(Long id);
-
-    public void save(message message);
+    List<message> getMessagesByParentId(Long parentId);
+    List<message> getMessagesByAdminId(Long adminId);
+    message saveMessage(message message);
 
 }
