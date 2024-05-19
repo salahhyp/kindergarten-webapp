@@ -2,6 +2,7 @@ package com.daaw.project.services;
 
 
 import com.daaw.project.model.educator;
+import com.daaw.project.model.user;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,4 +18,5 @@ public interface educatorService {
     List<educator> getAlleducators();
 
     educator addeducator(educator educator);
+    educator findByUser(user user);
 }

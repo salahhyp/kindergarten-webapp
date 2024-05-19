@@ -3,6 +3,7 @@ package com.daaw.project.Impl;
 
 
 import com.daaw.project.model.educator;
+import com.daaw.project.model.user;
 import com.daaw.project.repositories.educatorRepository;
 import com.daaw.project.services.educatorService;
 
@@ -56,6 +57,12 @@ public class educatorServiceImpl implements educatorService {
     public Optional<educator> geteducatorById(Long id) {
         return educatorRepository.findById(id);
 
+    }
+
+    @Override
+    public educator findByUser(user user) {
+
+        return educatorRepository.findByUser(user);
     }
 
 }

@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface sessionRepository extends JpaRepository<session,Long>{
 
+    List<session> findAllByGroupId(Long groupId);
+
 }

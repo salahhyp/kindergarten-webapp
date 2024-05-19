@@ -37,6 +37,12 @@ public class sessionServiceImpl implements sessionService {
         sessionRepository.deleteById(id);
     }
 
+    @Override
+    public List<session> findAllByGroupId(Long groupId) {
+
+        return sessionRepository.findAllByGroupId(groupId);
+    }
+
 
 
 }
