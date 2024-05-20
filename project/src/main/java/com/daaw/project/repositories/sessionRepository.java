@@ -12,4 +12,6 @@ public interface sessionRepository extends JpaRepository<session,Long>{
 
     List<session> findAllByGroupId(Long groupId);
 
+    List<session> findAllByEducatorId(Long educatorId);
+
 }

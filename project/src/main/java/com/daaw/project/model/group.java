@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "childrenGroups")
 @Data
@@ -31,6 +33,7 @@ public class group {
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<child> children;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<session> sessions;
 

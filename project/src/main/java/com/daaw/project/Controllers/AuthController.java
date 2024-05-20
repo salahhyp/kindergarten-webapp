@@ -102,7 +102,7 @@ public class AuthController {
         // Create and link role-specific entities
         createRoleSpecificEntities(user, roles);
     
-        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+        return new ResponseEntity<>("User " + user.getId() + " User registered successfully", HttpStatus.OK);
     }
     
     private void createRoleSpecificEntities(user user, List<role> roles) {

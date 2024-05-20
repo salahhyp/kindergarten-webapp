@@ -64,7 +64,9 @@ public class SecurityConfiguration {
 
                 .requestMatchers("/api/parent").permitAll()
                 .requestMatchers("/api/educators").permitAll()
-                .requestMatchers("/api/educators/**").permitAll()
+                .requestMatchers("/api/educators").permitAll()
+
+                .requestMatchers("/api/educator/**").permitAll()
                 .requestMatchers("/api/parents/**").permitAll()
                 .requestMatchers("/api/payments").permitAll()
                 .requestMatchers("/api/preinscrits/**").permitAll()

@@ -43,6 +43,11 @@ public class sessionServiceImpl implements sessionService {
         return sessionRepository.findAllByGroupId(groupId);
     }
 
+    @Override
+    public List<session> findAllByEducatorId(Long educatorId) {
+        return sessionRepository.findAllByEducatorId(educatorId);
+    }
+
 
 
 }
