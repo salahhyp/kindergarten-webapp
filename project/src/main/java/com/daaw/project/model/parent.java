@@ -18,12 +18,13 @@ public class parent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "nom")
-    private String nom;
-    @Column(name = "prenom")
-    private String prenom;
-    @Column(name = "address")
-    private String address;
+
+    @Column(name = "name")
+    private String name;
+
+
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
@@ -36,6 +37,7 @@ public class parent {
     private List<payment> payments;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<event> events = new ArrayList<>();
 
 
@@ -45,6 +47,7 @@ public class parent {
     private user user;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<message> messages = new ArrayList<>();
 
     @PostPersist

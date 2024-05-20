@@ -1,5 +1,6 @@
 package com.daaw.project.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,6 +37,7 @@ public class admin {
     private user user;
 
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<message> messages = new ArrayList<>();
     @PostPersist
     private void linkUserToAdmin() {

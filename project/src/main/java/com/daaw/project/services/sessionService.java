@@ -7,6 +7,7 @@ public interface sessionService {
     List<session> findAll();
     session save(session session);
     void deleteById(Long id);
+    List<session> findAllByGroupId(Long groupId);
 
 
 }

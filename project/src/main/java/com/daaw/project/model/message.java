@@ -1,4 +1,5 @@
 package com.daaw.project.model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,16 +20,19 @@ public class message {
 
     @ManyToOne
     @JoinColumn(name = "parent_id", nullable = false)
+    @JsonBackReference
     private parent parent;
 
     @ManyToOne
     @JoinColumn(name = "admin_id", nullable = false)
+    @JsonBackReference
     private admin admin;
 
     @Column(name = "content", nullable = false)
     private String content;
 
-    @Column(name = "timestamp", nullable = false)
+    @CreationTimestamp
+    @Column(name = "timestamp", nullable = false, updatable = false)
     private LocalDateTime timestamp;
 
     @Enumerated(EnumType.STRING)

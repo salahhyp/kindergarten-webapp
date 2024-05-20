@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <title>Track My Phone Location</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-$END$
+<h1>Track My Phone Location</h1>
+<button onclick="trackLocation()">Track</button>
+
+<script>
+    function trackLocation() {
+        window.location.href = 'https://my.findmykids.org/';
+    }
+</script>
 </body>
 </html>

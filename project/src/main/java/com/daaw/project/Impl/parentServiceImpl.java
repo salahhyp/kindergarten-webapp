@@ -1,8 +1,12 @@
 package com.daaw.project.Impl;
 
 import com.daaw.project.model.parent;
+import com.daaw.project.model.user;
 import com.daaw.project.repositories.parentRepository;
 import com.daaw.project.services.parentService;
+
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,6 +44,24 @@ public class parentServiceImpl implements parentService {
     @Override
     public parent getParentById(Long parentId) {
         return parentRepository.findById(parentId).orElse(null);
+    }
+
+    @Override
+    public parent findByUser(Optional<user> user) {
+
+        return parentRepository.findByUser(user);
+    }
+
+    @Override
+    public parent save(parent parent) {
+
+        return parentRepository.save(parent);
+    }
+
+    @Override
+    public Optional<parent> findById(Long id) {
+
+        return parentRepository.findById(id);
     }
 
 
