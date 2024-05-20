@@ -1,5 +1,7 @@
 package com.daaw.project.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,8 +31,10 @@ public class event {
 
     @ManyToOne
     @JoinColumn(name = "parent_id")
+    @JsonBackReference
     private parent parent;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "admin_id")
     private admin admin;

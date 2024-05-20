@@ -56,7 +56,6 @@ public class SecurityConfiguration {
                 .requestMatchers("/api/auth/register").permitAll()
                 .requestMatchers("/api/events").permitAll()
                 .requestMatchers("/api/child").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/parent").permitAll()
                 .requestMatchers("/api/child/**").permitAll()
                 .requestMatchers("/api/absences").permitAll()
                 .requestMatchers("/api/sessions").permitAll()

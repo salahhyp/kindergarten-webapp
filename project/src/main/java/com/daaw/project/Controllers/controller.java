@@ -1,9 +1,7 @@
 package com.daaw.project.Controllers;
 
-import com.daaw.project.dto.ChildDto;
-import com.daaw.project.dto.EducatorUpdateDto;
-import com.daaw.project.dto.ParentUpdateDto;
-import com.daaw.project.dto.SessionDto;
+
+import com.daaw.project.dto.*;
 import com.daaw.project.model.*;
 import com.daaw.project.repositories.parentRepository;
 import com.daaw.project.repositories.userRepository;
@@ -173,16 +171,16 @@ public class controller {
 
     // Endpoints for absences
     @PostMapping("/absences")
-    public ResponseEntity<absences> addabsence(@RequestBody absences absences) {
-        absences savedabsence = absencesService.addabsence(absences);
-        return new ResponseEntity<>(savedabsence, HttpStatus.CREATED);
-    }
-    @GetMapping("/absences")
-    public ResponseEntity<List<absences>> getAllabsences() {
-        List<absences> absences = absencesService.getAllabsences();
-        return new ResponseEntity<>(absences, HttpStatus.OK);
+    public ResponseEntity<AbsenceDto> addabsence(@RequestBody AbsenceDto absenceDto) {
+        AbsenceDto savedAbsence = absencesService.addabsence(absenceDto);
+        return new ResponseEntity<>(savedAbsence, HttpStatus.CREATED);
     }
 
+    @GetMapping("/absences")
+    public ResponseEntity<List<AbsenceDto>> getAllabsences() {
+        List<AbsenceDto> absences = absencesService.getAllabsences();
+        return new ResponseEntity<>(absences, HttpStatus.OK);
+    }
 
     // Endpoints for educator
     @PostMapping("/educators")
@@ -240,10 +238,11 @@ public class controller {
 
 
     @PostMapping("/events")
-    public ResponseEntity<event> addevent(@RequestBody event event) {
-        event savedevent = eventService.addevent(event);
+    public ResponseEntity<event> addevent(@RequestBody EventDto eventDto) {
+        event savedevent = eventService.addevent(eventDto);
         return new ResponseEntity<>(savedevent, HttpStatus.CREATED);
     }
+
     @GetMapping("/events")
     public ResponseEntity<List<event>> getAllevents() {
         List<event> events = eventService.getAllevents();

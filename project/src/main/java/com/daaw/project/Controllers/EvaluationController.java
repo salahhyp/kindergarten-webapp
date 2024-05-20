@@ -1,5 +1,6 @@
 package com.daaw.project.Controllers;
 
+import com.daaw.project.dto.EvaluationDto;
 import com.daaw.project.model.evaluation;
 import com.daaw.project.services.evaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class EvaluationController {
     }
 
     @PostMapping("/child/post")
-    public ResponseEntity<evaluation> createevaluation(@RequestBody evaluation evaluation) {
-        evaluation savedevaluation = evaluationService.saveEvaluation(evaluation);
+    public ResponseEntity<evaluation> createevaluation(@RequestBody EvaluationDto evaluationDto) {
+        evaluation savedevaluation = evaluationService.saveEvaluation(evaluationDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedevaluation);
     }
 
