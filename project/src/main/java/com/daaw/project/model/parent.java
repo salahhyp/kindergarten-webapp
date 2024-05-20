@@ -37,7 +37,6 @@ public class parent {
     private List<payment> payments;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<event> events = new ArrayList<>();
 
 
@@ -47,7 +46,6 @@ public class parent {
     private user user;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<message> messages = new ArrayList<>();
 
     @PostPersist

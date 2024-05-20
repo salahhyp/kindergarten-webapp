@@ -33,7 +33,6 @@ public class groupServiceImpl implements groupService {
     //     groupRepository.saveAll(Arrays.asList(group1, group2, group3, group4, group5, group6));
     // }
 
-
     @Override
     public group createGroup(group group) {
         return groupRepository.save(group);

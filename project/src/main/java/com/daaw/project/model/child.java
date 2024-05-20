@@ -3,14 +3,13 @@ package com.daaw.project.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.List;
-
 @Entity
 @Table(name = "child")
 @Setter @Getter @AllArgsConstructor @NoArgsConstructor
@@ -52,7 +51,6 @@ public class child {
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private parent parent;
-
     @JsonManagedReference
     @OneToMany(mappedBy = "child", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<evaluation> evaluations;

@@ -8,9 +8,9 @@ import com.daaw.project.model.*;
 import com.daaw.project.repositories.parentRepository;
 import com.daaw.project.repositories.userRepository;
 import com.daaw.project.services.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -61,7 +61,7 @@ public class controller {
 
     // Endpoints for child
     @PostMapping("/child")
-    public ResponseEntity<child> addchild(@RequestBody ChildDto childDto) {
+    public ResponseEntity<String> addchild(@RequestBody ChildDto childDto) {
         Optional<parent> parent = parentRepository.findById(childDto.getParentId());
 
         child child = new child();
@@ -74,7 +74,7 @@ public class controller {
         // Save the child object
         child addedChild = childService.addchild(child);
 
-        return ResponseEntity.ok().body(addedChild);
+        return new ResponseEntity<String>("Child " + addedChild.getId() + " Child registered successfully", HttpStatus.OK);
     }
 
 
@@ -133,11 +133,19 @@ public class controller {
         return new ResponseEntity<>(session, HttpStatus.CREATED);
     }
 
-    @GetMapping("/sessions/{groupId}")
-    public ResponseEntity<List<session>> getAllSessions(@PathVariable Long groupId) {
+    @GetMapping("/sessions/group/{groupId}")
+    public ResponseEntity<List<session>> getAllGroupSessions(@PathVariable Long groupId) {
         List<session> sessions = sessionService.findAllByGroupId(groupId);
         return new ResponseEntity<>(sessions, HttpStatus.OK);
     }
+
+
+    @GetMapping("/sessions/educator/{educatorId}")
+    public ResponseEntity<List<session>> getAllEducatorSessions(@PathVariable Long educatorId) {
+        List<session> sessions = sessionService.findAllByEducatorId(educatorId);
+        return new ResponseEntity<>(sessions, HttpStatus.OK);
+    }
+
 
     @PutMapping("/sessions/{id}")
     public ResponseEntity<session> updateSession(@PathVariable Long id, @RequestBody session updatedSession) {
@@ -182,7 +190,7 @@ public class controller {
         educator savededucator = educatorService.addeducator(educator);
         return new ResponseEntity<>(savededucator, HttpStatus.CREATED);
     }
-    @PutMapping("/educators/{userId}")
+    @PutMapping("/educator/{userId}")
     public ResponseEntity<String> updateEducator(@PathVariable Long userId, @RequestBody EducatorUpdateDto updateDto) {
         // Find the user by userId
         Optional<user> user = userRepository.findById(userId);
@@ -204,6 +212,23 @@ public class controller {
 
         return new ResponseEntity<String>("Educator " + updatedEducator.getId() + " Educator registered successfully", HttpStatus.OK);
     }
+    @GetMapping("/educator")
+    public ResponseEntity<educator> getEducator(@RequestParam String username) {
+        // Find the user by userId
+        Optional<user> user = userRepository.findByUsername(username);
+        if (!user.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with username " + username);
+        }
+
+        // Find the associated parent entity
+        educator educator = educatorService.findByUser(user.get());
+        if (educator == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Educator not found for user with username " + username);
+        }
+
+        return new ResponseEntity<>(educator, HttpStatus.OK);
+    }
+
 
     @GetMapping("/educators")
     public ResponseEntity<List<educator>> getAlleducators() {
@@ -261,11 +286,12 @@ public class controller {
 
 
 
-    @PostMapping(value = "/parent", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("/parent")
     public ResponseEntity<parent> addparent(@RequestBody parent parent) {
         parent newparent = parentService.addparent(parent);
         return new ResponseEntity<>(newparent, HttpStatus.CREATED);
     }
+
     @PutMapping("/parents/{userId}")
     public ResponseEntity<String> updateParent(@PathVariable Long userId, @RequestBody ParentUpdateDto updateDto) {
         Optional<user> user = userRepository.findById(userId);
