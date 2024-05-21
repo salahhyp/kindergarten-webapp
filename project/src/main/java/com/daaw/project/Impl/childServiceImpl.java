@@ -1,6 +1,8 @@
 package com.daaw.project.Impl;
 
 import com.daaw.project.model.child;
+import com.daaw.project.model.parent;
+import com.daaw.project.model.user;
 import com.daaw.project.repositories.childRepository;
 import com.daaw.project.services.childService;
 
@@ -57,5 +59,17 @@ public class childServiceImpl implements childService {
     public List<child> getChildrenByGroupId(Long groupId) {
 
         return childRepository.getChildrenByGroupId(groupId);
+    }
+
+    @Override
+    public child getChildByParentId(Long parentId) {
+        return childRepository.getChildByParentId(parentId);
+    }
+
+
+
+    @Override
+    public child findByParent(parent parent) {
+        return childRepository.findByParent(parent);
     }
 }

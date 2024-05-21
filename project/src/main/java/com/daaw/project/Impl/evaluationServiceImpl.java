@@ -54,4 +54,14 @@ public class evaluationServiceImpl implements evaluationService {
     public List<evaluation> getEvaluationsByEducatorId(Long educatorId) {
         return evaluationRepository.findByEducatorId(educatorId);
     }
+
+    @Override
+    public List<evaluation> getEvaluationsByEducatorIdAndChildId(Long educatorId, Long childId) {
+        return evaluationRepository.findByEducatorIdAndChildId(educatorId, childId);
+    }
+
+    @Override
+    public void deleteEvaluationById(Long evaluationId) {
+        evaluationRepository.deleteById(evaluationId);
+    }
 }

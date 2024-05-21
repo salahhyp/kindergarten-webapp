@@ -9,4 +9,6 @@ public interface evaluationService {
     evaluation saveEvaluation(EvaluationDto evaluationDto);
     List<evaluation> getEvaluationsByChildId(Long childId);
     List<evaluation> getEvaluationsByEducatorId(Long educatorId);
+    List<evaluation> getEvaluationsByEducatorIdAndChildId(Long educatorId, Long childId);
+    void deleteEvaluationById(Long evaluationId);
 }

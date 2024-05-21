@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "childrenGroups")
@@ -30,6 +31,7 @@ public class group {
     @Column(name = "schedule")
     private Schedule schedule;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<child> children;
 

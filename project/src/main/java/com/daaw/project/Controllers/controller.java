@@ -77,9 +77,21 @@ public class controller {
 
 
     @GetMapping("/child")
-    public ResponseEntity<List<child>> getAllchilds() {
-        List<child> children = childService.getAllchildren();
-        return ResponseEntity.ok().body(children);
+    public ResponseEntity<ChildDto> getChild(@RequestParam String parentUsername) {
+        // Find the user by userId
+        Optional<user> user = userRepository.findByUsername(parentUsername);
+        System.out.println(user.get().getRoles()+" for "+ parentUsername);
+        if (!user.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with parentUsername " + parentUsername);
+        }
+
+        child child = childService.findByParent(parentService.findByUser(user));
+        if (child == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Child not found for user with parentUsername " + parentUsername);
+        }
+        ChildDto fetchedChild = new ChildDto(child);
+
+        return new ResponseEntity<>(fetchedChild, HttpStatus.OK);
     }
     @GetMapping("/children/{groupId}")
     public ResponseEntity<List<child>> getGroupChildren(@PathVariable Long groupId) {

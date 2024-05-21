@@ -1,5 +1,6 @@
 package com.daaw.project.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -42,7 +43,7 @@ public class child {
         FULL_DAY
     }
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "group_id")
     private group group;
@@ -51,8 +52,10 @@ public class child {
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private parent parent;
+    
     @JsonManagedReference
     @OneToMany(mappedBy = "child", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<evaluation> evaluations;
+
 
 }

@@ -10,4 +10,5 @@ import java.util.List;
 public interface evaluationRepository extends JpaRepository<evaluation, Long> {
     List<evaluation> findByChildId(Long childId);
     List<evaluation> findByEducatorId(Long educatorId);
+    List<evaluation> findByEducatorIdAndChildId(Long educatorId, Long childId);
 }

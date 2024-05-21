@@ -40,4 +40,15 @@ public class EvaluationController {
         List<evaluation> evaluations = evaluationService.getEvaluationsByEducatorId(educatorId);
         return ResponseEntity.ok(evaluations);
     }
+
+    @GetMapping("/educator/{educatorId}/child/{childId}")
+    public ResponseEntity<List<evaluation>> getEducatorEvalutationsPerChild(@PathVariable Long educatorId, @PathVariable Long childId) {
+        List<evaluation> evaluations = evaluationService.getEvaluationsByEducatorIdAndChildId(educatorId, childId);
+        return ResponseEntity.ok(evaluations);
+    }
+    @DeleteMapping("/evaluation/{evaluationId}")
+        public ResponseEntity<Void> deleteEvaluation(@PathVariable Long evaluationId) {
+        evaluationService.deleteEvaluationById(evaluationId);
+    return ResponseEntity.noContent().build();
+}
 }
