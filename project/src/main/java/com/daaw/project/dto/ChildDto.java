@@ -5,9 +5,10 @@ import com.daaw.project.model.child.Plan;
 import com.daaw.project.model.child.Schedule;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-
+@NoArgsConstructor
 public class ChildDto {
     String name;
     Long age;
