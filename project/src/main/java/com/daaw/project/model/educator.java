@@ -1,5 +1,6 @@
 package com.daaw.project.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -41,7 +42,8 @@ public class educator {
             user.setEducator(this);
         }
     }
-    @JsonManagedReference
+
+    @JsonBackReference
     @OneToMany(mappedBy = "educator", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<evaluation> evaluations;
 

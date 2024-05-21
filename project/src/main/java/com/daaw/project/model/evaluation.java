@@ -1,6 +1,8 @@
 package com.daaw.project.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +23,8 @@ public class evaluation {
     @ManyToOne
     @JoinColumn(name = "child_id", nullable = false)
     private child child;
-    @JsonBackReference
+
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "educator_id", nullable = false)
     private educator educator;
