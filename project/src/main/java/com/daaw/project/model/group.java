@@ -34,7 +34,6 @@ public class group {
     private List<child> children;
 
     @JsonIgnore
-
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<session> sessions;
 

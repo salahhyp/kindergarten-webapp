@@ -26,7 +26,6 @@ public class session {
     @Column(name = "time")
     private String time;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "group_id")
     private group group;

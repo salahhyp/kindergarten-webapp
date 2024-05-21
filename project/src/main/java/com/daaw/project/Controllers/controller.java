@@ -81,6 +81,11 @@ public class controller {
         List<child> children = childService.getAllchildren();
         return ResponseEntity.ok().body(children);
     }
+    @GetMapping("/children/{groupId}")
+    public ResponseEntity<List<child>> getGroupChildren(@PathVariable Long groupId) {
+        List<child> children = childService.getChildrenByGroupId(groupId);
+        return ResponseEntity.ok().body(children);
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteChildById(@PathVariable("id") Long id) {
         childService.deletechildById(id);

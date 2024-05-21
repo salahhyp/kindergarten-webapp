@@ -16,4 +16,6 @@ public interface childService {
     List<child> getAllchildren();
 
     Optional<child> getchildById(Long id);
+    List<child> getChildrenByGroupId(Long groupId);
+
 }

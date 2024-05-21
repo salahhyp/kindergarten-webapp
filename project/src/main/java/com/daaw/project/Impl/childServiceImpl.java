@@ -53,4 +53,9 @@ public class childServiceImpl implements childService {
         return childRepository.findById(id);
 
     }
+    @Override
+    public List<child> getChildrenByGroupId(Long groupId) {
+
+        return childRepository.getChildrenByGroupId(groupId);
+    }
 }
