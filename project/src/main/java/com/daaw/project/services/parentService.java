@@ -27,5 +27,7 @@ public interface parentService {
     public parent save(parent parent);
 
     public Optional<parent> findById(Long id);
+
+    public parent findByUser(user user);
 }
 

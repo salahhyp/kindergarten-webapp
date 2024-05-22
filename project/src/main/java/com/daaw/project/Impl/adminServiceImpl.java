@@ -2,6 +2,7 @@ package com.daaw.project.Impl;
 
 
 import com.daaw.project.model.admin;
+import com.daaw.project.model.user;
 import com.daaw.project.repositories.adminRepository;
 import com.daaw.project.services.adminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,4 +43,9 @@ public class adminServiceImpl implements adminService{
     public admin getAdminById(Long adminId) {
         return adminRepository.findById(adminId).orElse(null);
 }
+
+    @Override
+    public admin findByUser(user user) {
+        return adminRepository.findByUser(user);
+    }
 }

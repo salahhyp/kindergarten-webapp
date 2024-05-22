@@ -13,4 +13,6 @@ import java.util.Optional;
 public interface parentRepository extends JpaRepository<parent,Long> {
 
     parent findByUser(Optional<user> user);
+
+    parent findByUser(user user);
 }

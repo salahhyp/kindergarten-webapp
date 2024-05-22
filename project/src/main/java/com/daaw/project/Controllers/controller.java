@@ -26,6 +26,8 @@ public class controller {
     @Autowired
     private parentRepository parentRepository;
 
+    @Autowired
+    private adminService adminService;
 
     @Autowired
     private sessionService sessionService;
@@ -56,6 +58,26 @@ public class controller {
 
     @Autowired
     private visitorService visitorService;
+
+
+    @GetMapping("/admin")
+    public ResponseEntity<admin> getAdmin(@RequestParam String username) {
+        // Find the user by userId
+        Optional<user> user = userRepository.findByUsername(username);
+        if (!user.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with username " + username);
+        }
+
+        // Find the associated parent entity
+        admin admin = adminService.findByUser(user.get());
+        if (admin == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Admin not found for user with username " + username);
+        }
+
+        return new ResponseEntity<>(admin, HttpStatus.OK);
+    }
+
+
 
     // Endpoints for child
     @PostMapping("/child")
@@ -306,7 +328,22 @@ public class controller {
 
 
 
+    @GetMapping("/parent")
+    public ResponseEntity<parent> getParent(@RequestParam String username) {
+        // Find the user by userId
+        Optional<user> user = userRepository.findByUsername(username);
+        if (!user.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with username " + username);
+        }
 
+        // Find the associated parent entity
+        parent parent = parentService.findByUser(user.get());
+        if (parent == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Parent not found for user with username " + username);
+        }
+
+        return new ResponseEntity<>(parent, HttpStatus.OK);
+    }
 
 
     @PostMapping("/parent")

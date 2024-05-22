@@ -1,5 +1,6 @@
 package com.daaw.project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,10 +29,12 @@ public class admin {
     private String adress;
 
 
+    @JsonIgnore
     @OneToMany(mappedBy = "admin")
     private List<event> events;
 
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private user user;

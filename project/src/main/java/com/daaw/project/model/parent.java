@@ -1,5 +1,7 @@
 package com.daaw.project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,18 +32,21 @@ public class parent {
     @JsonManagedReference
     private List<Location> locations = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "parent")
     private List<child> children;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "parent")
     private List<payment> payments;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<event> events = new ArrayList<>();
 
 
-
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private user user;

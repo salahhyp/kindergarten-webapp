@@ -19,6 +19,7 @@ import com.daaw.project.services.parentService;
 import com.daaw.project.services.adminService;
 import java.time.LocalDateTime;
 
+@CrossOrigin(origins="http://localhost:3000")
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {

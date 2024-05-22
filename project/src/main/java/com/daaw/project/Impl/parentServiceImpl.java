@@ -64,6 +64,11 @@ public class parentServiceImpl implements parentService {
         return parentRepository.findById(id);
     }
 
+    @Override
+    public parent findByUser(user user) {
+        return parentRepository.findByUser(user);
+    }
+
 
 
 }
