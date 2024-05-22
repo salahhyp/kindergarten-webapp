@@ -1,5 +1,6 @@
 package com.daaw.project.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -40,7 +41,8 @@ public class admin {
     private user user;
 
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+
+    @JsonBackReference
     private List<message> messages = new ArrayList<>();
     @PostPersist
     private void linkUserToAdmin() {

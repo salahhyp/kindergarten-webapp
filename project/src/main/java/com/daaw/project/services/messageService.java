@@ -7,7 +7,8 @@ import java.util.Optional;
 public interface messageService {
 
     MessageDto saveMessage(MessageDto messageDTO);
-    List<MessageDto> getMessagesByParentId(Long parentId);
+    List<message> getMessagesByParentId(Long parentId);
     List<MessageDto> getMessagesByAdminId(Long adminId);
+    List<MessageDto> getMessagesByAdminIdAndParentId(Long adminId, Long parentId);
 
 }

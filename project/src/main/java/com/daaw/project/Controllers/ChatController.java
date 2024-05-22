@@ -28,14 +28,19 @@ public class ChatController {
     private messageService messageService;
 
     @GetMapping("/parent/{parentId}")
-    public ResponseEntity<List<MessageDto>> getMessagesByParentId(@PathVariable Long parentId) {
-        List<MessageDto> messages = messageService.getMessagesByParentId(parentId);
+    public ResponseEntity<List<message>> getMessagesByParentId(@PathVariable Long parentId) {
+        List<message> messages = messageService.getMessagesByParentId(parentId);
         return ResponseEntity.ok(messages);
     }
 
     @GetMapping("/admin/{adminId}")
     public ResponseEntity<List<MessageDto>> getMessagesByAdminId(@PathVariable Long adminId) {
         List<MessageDto> messages = messageService.getMessagesByAdminId(adminId);
+        return ResponseEntity.ok(messages);
+    }
+    @GetMapping("/conversation/{adminId}/{parentId}")
+    public ResponseEntity<List<MessageDto>> getConversation(@PathVariable Long adminId, @PathVariable Long parentId) {
+        List<MessageDto> messages = messageService.getMessagesByAdminIdAndParentId(adminId, parentId);
         return ResponseEntity.ok(messages);
     }
 

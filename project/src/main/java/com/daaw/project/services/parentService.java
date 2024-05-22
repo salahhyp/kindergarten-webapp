@@ -5,6 +5,7 @@ package com.daaw.project.services;
 import com.daaw.project.model.parent;
 import com.daaw.project.model.user;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -18,7 +19,7 @@ public interface parentService {
     public parent getparent(Long id);
     public void deleteparent(Long id);
 
-    public Page<parent> getAllparents(Pageable pageable);
+    public List<parent> getAllparents();
 
     parent getParentById(Long parentId);
 

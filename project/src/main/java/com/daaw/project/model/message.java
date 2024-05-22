@@ -1,5 +1,7 @@
 package com.daaw.project.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +27,9 @@ public class message {
 
     @ManyToOne
     @JoinColumn(name = "admin_id", nullable = false)
-    @JsonBackReference
+    
+    
+    @JsonManagedReference
     private admin admin;
 
     @Column(name = "content", nullable = false)

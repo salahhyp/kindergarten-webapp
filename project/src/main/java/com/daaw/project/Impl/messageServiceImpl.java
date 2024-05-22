@@ -65,10 +65,8 @@ public class messageServiceImpl implements messageService {
     }
 
     @Override
-    public List<MessageDto> getMessagesByParentId(Long parentId) {
-        return messageRepository.findByParentId(parentId).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+    public List<message> getMessagesByParentId(Long parentId) {
+        return messageRepository.findByParentId(parentId);
     }
 
     @Override
@@ -87,5 +85,12 @@ public class messageServiceImpl implements messageService {
         dto.setTimestamp(message.getTimestamp());
         dto.setSender(message.getSender().name());
         return dto;
+    }
+
+    @Override
+    public List<MessageDto> getMessagesByAdminIdAndParentId(Long adminId, Long parentId) {
+        return messageRepository.findAllByAdminIdAndParentId(adminId, parentId).stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 }

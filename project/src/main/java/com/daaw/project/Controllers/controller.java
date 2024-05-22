@@ -327,7 +327,12 @@ public class controller {
     }
 
 
-
+    @GetMapping("/parents")
+    public ResponseEntity<List<parent>> getAllParents() {
+        List<parent> parents = parentService.getAllparents();
+        return new ResponseEntity<>(parents, HttpStatus.OK);
+    }
+    
     @GetMapping("/parent")
     public ResponseEntity<parent> getParent(@RequestParam String username) {
         // Find the user by userId

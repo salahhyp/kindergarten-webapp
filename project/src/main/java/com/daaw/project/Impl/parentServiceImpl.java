@@ -5,6 +5,7 @@ import com.daaw.project.model.user;
 import com.daaw.project.repositories.parentRepository;
 import com.daaw.project.services.parentService;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,8 @@ public class parentServiceImpl implements parentService {
     }
 
     @Override
-    public Page<parent> getAllparents(Pageable pageable) {
-        return parentRepository.findAll(pageable);
+    public List<parent> getAllparents() {
+        return parentRepository.findAll();
     }
 
 
