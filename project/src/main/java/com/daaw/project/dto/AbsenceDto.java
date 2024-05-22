@@ -1,5 +1,7 @@
 package com.daaw.project.dto;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,5 +16,6 @@ public class AbsenceDto {
     private String description;
     private String justification;
     private Long childId;
-    private Long sessionId;
+    private LocalDate startDate;
+    private LocalDate endDate;
 }

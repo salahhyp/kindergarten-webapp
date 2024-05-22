@@ -199,6 +199,13 @@ public class controller {
         return new ResponseEntity<>(absences, HttpStatus.OK);
     }
 
+    @GetMapping("/absences/{childId}")
+    public ResponseEntity<List<absences>> getChildAbsences(@PathVariable Long childId) {
+        child child = childService.findById(childId);
+        List<absences> absences = absencesService.getAbsencesByChild(child);
+        return new ResponseEntity<>(absences, HttpStatus.OK);
+    }
+
     // Endpoints for educator
     @PostMapping("/educators")
     public ResponseEntity<educator> addeducator(@RequestBody educator educator) {

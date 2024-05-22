@@ -1,5 +1,7 @@
 package com.daaw.project.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,8 +27,10 @@ public class absences {
     @JoinColumn(name = "child_id")
     private child child;
 
-    @ManyToOne
-    @JoinColumn(name = "session_id")
-    private session session;
+    @Column(name = "start_date")
+    private LocalDate startDate;
+
+    @Column(name = "end_date")
+    private LocalDate endDate;
 
 }

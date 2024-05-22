@@ -70,7 +70,9 @@ public class absencesServiceImpl implements absencesService {
         dto.setDescription(absence.getDescription());
         dto.setJustification(absence.getJustification());
         dto.setChildId(absence.getChild().getId());
-        dto.setSessionId(absence.getSession().getId());
+        dto.setStartDate(absence.getStartDate());
+        dto.setEndDate(absence.getEndDate());
+        
         return dto;
     }
 
@@ -79,13 +81,18 @@ public class absencesServiceImpl implements absencesService {
         absence.setId(dto.getId());
         absence.setDescription(dto.getDescription());
         absence.setJustification(dto.getJustification());
+        absence.setStartDate(dto.getStartDate());
+        absence.setEndDate(dto.getEndDate());
 
         Optional<child> child = childRepository.findById(dto.getChildId());
-        Optional<session> session = sessionRepository.findById(dto.getSessionId());
 
         child.ifPresent(absence::setChild);
-        session.ifPresent(absence::setSession);
 
         return absence;
+    }
+
+    @Override
+    public List<absences> getAbsencesByChild(child child) {
+        return absencesRepository.findByChild(child);
     }
 }
